@@ -4,6 +4,8 @@
 ![Python](https://img.shields.io/badge/python-3.9%2B-blue)
 ![Status](https://img.shields.io/badge/status-report%20Completed-green)
 
+Link to the project report(including comprehensive image comparisons) - https://drive.google.com/file/d/1UeeZz5ReF-GvqYwLRLAddSHEYU5yj9Br/view?usp=sharing
+
 A Linear Algebra mini project (PES University, Department of CSE). A colour photo is a matrix of RGB pixels. We apply photo filters as **3x3 matrix multiplication**, combine them with **matrix products**, and try to undo them with **matrix inverses**. The project shows which filters can be reversed, which cannot, and why some reversible ones still fail in practice.
 
 ## The idea in 30 seconds
