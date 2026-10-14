@@ -1,5 +1,5 @@
 """
-utils.py  --  PERSON 1: image <-> matrix pipeline (everyone imports this file)
+utils.py  --  KARTHIK K R: image <-> matrix pipeline (everyone imports this file)
 
 Conventions (do not change without telling the team):
   * An image is a float64 NumPy array of shape (H, W, 3), values in [0, 1].
