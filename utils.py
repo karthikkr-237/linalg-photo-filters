@@ -93,8 +93,11 @@ def make_sample_image(path, h=240, w=360):
     return path
 
 
-def show_side_by_side(images, titles, save_to=None, show=True):
-    """Display (and optionally save) several images in one row."""
+def show_side_by_side(images, titles, save_to=None, show=False):
+    """Save (save_to) and/or display (show=True) several images in one row.
+
+    show defaults to False so scripts never stop at a pop-up window;
+    the Colab notebook passes show=True to display inline."""
     import matplotlib.pyplot as plt
     fig, axes = plt.subplots(1, len(images), figsize=(4 * len(images), 4))
     axes = np.atleast_1d(axes)
