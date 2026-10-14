@@ -1,5 +1,5 @@
 """
-main.py  --  PERSON 1: runs the whole project and saves everything to output/
+main.py  --  Karthik K R: runs the whole project and saves everything to output/
 
 Usage:   python main.py                       (uses images/photo.jpg)
          python main.py --image my_pic.jpg --out output
@@ -12,6 +12,21 @@ import utils
 import filters
 import inverse
 from utils import banner
+
+
+# Filters that other modules look up by name (inverse.py needs these).
+REQUIRED_FILTERS = ["grayscale", "sepia", "swap_rb", "saturate", "mix"]
+
+
+def check_filter_contract():
+    """Stop early, with a clear message, if filters.py breaks the team contract."""
+    missing = [n for n in REQUIRED_FILTERS if n not in filters.FILTERS]
+    if missing:
+        raise SystemExit(f"filters.FILTERS is missing {missing}; inverse.py needs them.")
+    for name, A in filters.FILTERS.items():
+        if np.shape(A) != (3, 3):
+            raise SystemExit(f"Filter '{name}' must be a 3x3 matrix, got shape {np.shape(A)}")
+    print("Filter contract (3x3 matrices, required names present) ..... PASS")
 
 
 def stage1_load(path):
@@ -54,6 +69,7 @@ def stage2_selftest(img):
     assert mx <= 0.5 / 255 + 1e-9
     print(f"Save -> load round trip (max error {mx:.4f}) ........... PASS")
     os.remove("output/_roundtrip.png")
+    check_filter_contract()
 
 
 def main():
