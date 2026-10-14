@@ -2,7 +2,7 @@
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/karthikkr-237/linalg-photo-filters/blob/main/linalg_photo_filters_colab.ipynb)
 ![Python](https://img.shields.io/badge/python-3.9%2B-blue)
-![Status](https://img.shields.io/badge/status-report%20pending-orange)
+![Status](https://img.shields.io/badge/status-report%20Completed-green)
 
 A Linear Algebra mini project (PES University, Department of CSE). A colour photo is a matrix of RGB pixels. We apply photo filters as **3x3 matrix multiplication**, combine them with **matrix products**, and try to undo them with **matrix inverses**. The project shows which filters can be reversed, which cannot, and why some reversible ones still fail in practice.
 
@@ -157,7 +157,7 @@ Remaining before the presentation: add the real photo, fill in the placeholders 
 
 ## Dataset
 
-Input image: Image_created_with_a_mobile_phone by Wikipedia.
+Input image: Image.jpg by Wikipedia.
 
 ## Results
 
