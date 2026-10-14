@@ -76,10 +76,6 @@ def run(img, out_dir, filtered=None):
         else:
             print("  No inverse: this matrix is singular (information is lost).")
 
-    # FIX: use the 'mix' matrix for the by-hand inverse. Its determinant is
-    # 0.3025 and its entries are clean, so it can actually be worked out on
-    # paper (and explained in the viva). Sepia's determinant is about 1.2e-7,
-    # which is not realistic to do by hand.
     hand_name = "mix"
     hand_inv = inverse_3x3_by_hand(FILTERS[hand_name])
     np_inv = np.linalg.inv(FILTERS[hand_name])
@@ -89,9 +85,6 @@ def run(img, out_dir, filtered=None):
           bool(np.allclose(hand_inv, np_inv, rtol=1e-8, atol=1e-8)))
     assert np.allclose(hand_inv, np_inv, rtol=1e-8, atol=1e-8)
 
-    # ------------------------------------------------------------------
-    # 3) Exact recovery: no clipping, no rounding. Shows the maths is right.
-    # ------------------------------------------------------------------
     print("\n3) Image recovery, exact case (no clipping, no rounding)")
     for name, A in FILTERS.items():
         if name not in inverses:
@@ -103,11 +96,6 @@ def run(img, out_dir, filtered=None):
         print(f"  {name}: MSE={mse:.3g}, max abs error={max_err:.3g}")
     print("  -> Every invertible filter is undone perfectly (errors are ~1e-12 or less).")
 
-    # ------------------------------------------------------------------
-    # 4) FIX: realistic recovery. The task is to apply A^-1 to the FILTERED
-    #    images. Those are clipped to [0, 1] and saved as 8-bit files, which
-    #    loses information. This is where conditioning shows up in practice.
-    # ------------------------------------------------------------------
     print("\n4) Image recovery, realistic case (filtered image clipped to [0,1] "
           "and saved as 8-bit)")
     print(f"  {'filter':<11}{'cond':>11}{'MSE':>14}{'max abs err':>14}")
@@ -143,9 +131,6 @@ def run(img, out_dir, filtered=None):
         show=False,
     )
 
-    # ------------------------------------------------------------------
-    # 5) Singular case
-    # ------------------------------------------------------------------
     gray = FILTERS.get("grayscale")
     if gray is not None:
         print("\n5) Singular grayscale case")
@@ -159,9 +144,6 @@ def run(img, out_dir, filtered=None):
         print(f"  grayscale({c2}) = {gray @ c2}")
         print("  Same output for different inputs, so no inverse can tell them apart.")
 
-    # ------------------------------------------------------------------
-    # 6) (B A)^-1 = A^-1 B^-1
-    # ------------------------------------------------------------------
     print("\n6) Inverse of a product: (B @ A)^-1 = A^-1 @ B^-1")
     A = FILTERS["swap_rb"]
     B = FILTERS["saturate"]
